@@ -66,15 +66,31 @@
 				var _password = document.getElementsByName("_password")[0].value;
 				var _passwordCopy = document.getElementsByName("_passwordCopy")[0].value;
 				
-				if(_login != "") {
-					if(_password != "") {
-						if(_password == _passwordCopy) {
-							loading.style.display = "block";
-							button.className = "button_diactive";
+				if(_login == "") {
+					alert("Введите логин!");
+					return;
+				}
+
+				if(_password == "") {
+					alert("Введите пароль!");
+					return;
+				}
+
+				if(CheckPassword(_password) == false) {
+					alert("Пароль должен содержать минимум 8 символов, заглавную и строчную буквы, цифру и специальный символ!");
+					return;
+				}
+
+				if(_password != _passwordCopy) {
+					alert("Пароли не совпадают!");
+					return;
+				}
+				loading.style.display = "block";
+				button.className = "button_diactive";
 							
-							var data = new FormData();
-							data.append("login", _login);
-							data.append("password", _password);
+				var data = new FormData();
+				data.append("login", _login);
+				data.append("password", _password);
 							
 							// AJAX запрос
 							$.ajax({
@@ -100,6 +116,8 @@
 										button.className = "button";
 									}
 								},
+
+								
 								// функция ошибки
 								error: function( ){
 									console.log('Системная ошибка!');
@@ -107,10 +125,12 @@
 									button.className = "button";
 								}
 							});
-						} else alert("Пароли не совподают.");
-					} else alert("Введите пароль.");
-				} else alert("Введите логин.");
-			}
+						}
+						function CheckPassword(value){
+							let regex = /(?=.*[0-9])(?=.*[!@#$%^&*\-_=])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*\-_=]{8,}/;
+							return regex.test(value);
+						}
+
 			
 			function PressToEnter(e) {
 				if (e.keyCode == 13) {
