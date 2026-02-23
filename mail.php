@@ -94,16 +94,12 @@
 			
 			function PressToEnter(e) {
 				if (e.keyCode == 13) {
-					var _login = document.getElementsByName("_login")[0].value;
-					var _password = document.getElementsByName("_password")[0].value;
-
-                    if(_password != "") {
-						if(_login != "") {
-							LogIn();
-						}
+                    var _code = document.getElementsByName("_code")[0].value;
+                    if(_code != "") {
+                        LogIn();
+                    }
                 }
 			}
-        }
 			
 		</script>
 	</body>

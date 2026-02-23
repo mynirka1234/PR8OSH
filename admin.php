@@ -7,11 +7,16 @@
 			$user_query = $mysqli->query("SELECT * FROM `users` WHERE `id` = ".$_SESSION['user']); // проверяем
 			while($user_read = $user_query->fetch_row()) {
 				if($user_read[3] == 0) header("Location: index.php");
+
+				if($_SESSION['token'] != $user_read[4]){
+					session_destroy();
+					header("Location: login.php");
+				}
 			}
 		} else header("Location: login.php");
  	} else {
 		header("Location: login.php");
-		echo "Пользователя  существует...";
+		echo "Пользователя не существует";
 	}
 ?>
 <!DOCTYPE HTML>
