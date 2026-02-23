@@ -11,7 +11,7 @@
 		} else header("Location: login.php");
  	} else {
 		header("Location: login.php");
-		echo "Пользователя не существует...";
+		echo "Пользователя  существует...";
 	}
 ?>
 <!DOCTYPE HTML>
